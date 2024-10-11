@@ -1,10 +1,13 @@
-# Notes by danrod@gmail.com
+# Notes by danrod96
 
-I refactored the file `onlyfans-dl.py` to make it work given the latest changes at OF, the original instructions below should work with this new version.
+I did some refactoring on the file `onlyfans-dl.py` to make it work again, given that the original project [k0rnh0li0/onlyfans-dl](https://github.com/k0rnh0li0/onlyfans-dl) doesn't work anymore. The original instructions below should work with this new version.
 
 Any issues please open an issue in the project's page.
 
 Updated on: 10/10/2024
+
+ORIGINAL README.md file below
+-------------------------------------------------------------------
 
 THE GREAT KORNHOLIO PRESENTS
 
