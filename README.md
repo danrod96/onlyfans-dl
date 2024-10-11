@@ -4,7 +4,7 @@ I refactored the file `onlyfans-dl.py` to make it work given the latest changes 
 
 Any issues please open an issue in the project's page.
 
-10/10/2024
+Updated on: 10/10/2024
 
 THE GREAT KORNHOLIO PRESENTS
 

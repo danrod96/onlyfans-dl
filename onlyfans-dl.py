@@ -17,6 +17,7 @@ import requests
 import time
 import datetime as dt
 import hashlib
+import pickle
 
 # maximum number of posts to index
 # DONT CHANGE THAT
@@ -213,12 +214,16 @@ def download_public_files():
 # download a media item and save it to the relevant directory
 def download_media(media, is_archived):
     id = str(media["id"])
-    source = media["source"]["source"]
-
     if (media["type"] != "photo" and media["type"] != "video" and media["type"] != "gif") or not media['canView']:
         return
+    
+    # Get source file
+    files = media['files']
+    full_files = files['full']
+    url = full_files['url']
 
     # find extension
+    source = url
     ext = re.findall('\.\w+\?', source)
     if len(ext) == 0:
         return
@@ -236,9 +241,10 @@ def download_media(media, is_archived):
     else:
         path = "/"
     path += type + "s/" + id + ext
+    print(path)
 
     if not os.path.isfile("profiles/" + PROFILE + path):
-        # print(path)
+        print(path)
         global new_files
         new_files += 1
         download_file(source, path)
@@ -272,13 +278,15 @@ def calc_process_time(starttime, arraykey, arraylength):
 # iterate over posts, downloading all media
 # returns the new count of downloaded posts
 def download_posts(cur_count, posts, is_archived):
+    # print(posts)
+
     for k, post in enumerate(posts, start=1):
         if "media" not in post or ("canViewMedia" in post and not post["canViewMedia"]):
             continue
 
         for media in post["media"]:
-            if 'source' in media:
-                download_media(media, is_archived)
+          if 'type' in media:
+            download_media(media, is_archived)
 
         # adding some nice info in here for download stats
         timestats = calc_process_time(starttime, k, total_count)
@@ -386,7 +394,7 @@ if __name__ == "__main__":
             "id": PROFILE_INFO["id"],
             "name": PROFILE_INFO["name"],
             "username": PROFILE_INFO["username"],
-            "about": PROFILE_INFO["rawAbout"],
+            "about": "Abu",
             "joinDate": PROFILE_INFO["joinDate"],
             "website": PROFILE_INFO["website"],
             "wishlist": PROFILE_INFO["wishlist"],
